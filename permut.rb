@@ -87,10 +87,8 @@ post '/post' do
   annee = params[:annee]
   section = params[:section]
   clas = params[:clas]
-  o_class = annee,section,clas
-  o_class.join(',')
-  n_class = annee,section
-  n_class.join(',')
+  o_class = annee+section+clas
+  n_class = annee+section
   fb = params[:fb]
 
   n.nom = nom
