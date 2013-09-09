@@ -1,0 +1,10 @@
+<% if @lien %>  
+  <p>Are you sure you want to delete this link : <em>"<%=h @lien.url %>"</em>?</p>  
+  <form action="/<%= @lien.id %>" method="post">  
+    <input type="hidden" name="_method" value="delete">  
+    <input type="submit" value="Yes, Delete It!">  
+    <a href="/">Cancel</a>  
+  </form>  
+<% else %>  
+  <p>Link not found.</p>  
+<% end %>  

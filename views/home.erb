@@ -1,0 +1,11 @@
+<% # display Perm %>  
+<% @Perms.each do |perm| %> 
+  
+     <p>  
+      <strong><%=h perm.nom %></strong>
+      <span><a href="http://www.facebook.com/<%= perm.fb %>">Facebook</a></span>  
+    </p>  
+    <p >  
+     Class : <%= perm.o_class %>
+    </p>  
+<% end %>  
