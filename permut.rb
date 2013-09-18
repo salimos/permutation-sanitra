@@ -52,27 +52,6 @@ end
 
 
 
-#merde de la putain d'ajax de mes 2 -_-
-get '/ajax/section/:annee' do
-  annee = params[:annee]
-   case annee
-      when "1"  
-        "<option>A</option>"
-      when "2"
-        "<option>A</option><option>P</option>"
-      when "3"
-        "<option>A</option><option>B</option>"
-      when "4"
-        "<option>ARCTIC</option><option>ERP_BI</option><option>GL</option><option>INFINI</option>
-        <option>IRT</option><option>SIM</option><option>SLEAM</option><option>INFOB</option>
-        <option>TELB</option>"
-      when "5"
-        "<option>INFOA</option><option>INFOB</option><option>SIM</option>
-        <option>TELA</option><option>TELB</option>"   
-  end
-end
-
-
 
 
 post '/' do
@@ -84,11 +63,8 @@ post '/post' do
   n = Perm.new  
   #Nos params
   nom = params[:nom]
-  annee = params[:annee]
-  section = params[:section]
-  clas = params[:clas]
-  o_class = annee+section+clas
-  n_class = annee+section
+  o_class = params[:clas]
+  n_class = params[:n_clas]
   fb = params[:fb]
 
   n.nom = nom
@@ -96,26 +72,17 @@ post '/post' do
   n.n_class = n_class 
   n.fb = fb
   n.save  
+  puts "ID  = #{n.id}"
   redirect '/'  
 end  
 
 
 
 ##autre shit
-get '/:id/go' do 
-	lien = Perm.get params[:id]
-  lien.checked = 1
-  lien.save
-  "
-  <HTML>
-    <HEAD>
-      <META HTTP-EQUIV='refresh' CONTENT='5;URL=#{lien.url}'>
-    </HEAD>
-    <BODY>
-      <br /><br /><br /><h4 align='center'>Direction : #{lien.url}</h4>
-    </BODY>
-  </HTML>
-  " 
+get '/:id/afficher' do 
+	@demande = Perm.get params[:id]
+  @title = "#{@demande.id}"
+  erb :afficher
 end
 
 
@@ -137,6 +104,13 @@ end
 
 #Notre chére 404
 not_found do  
-  status 404  
-  '<h1>404</h1>Go home you\'r drunk'  
+  status 404
+  '
+  <html>
+    <head>
+    <title>404 | PErmutation</title> 
+    <head>
+    <body><h3>Go home you\'r drunk</h3></body>
+  </html>
+'
 end  
